@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
     }
+
+
 
     public void onRadioButtonClickedQuestion1(View view) {
         // Is the button now checked?
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         String Answer3=mAnswer3.getText().toString().toLowerCase();
         if (Answer3.equals("highbury")) { Question3=true;}
         //Question 5 checking
-        if (Question5_selection==4) {Question5=true;}
+        if (Question5_selection==4) {Question5=true;} else Question5=false;
         if (
                 (Question1==true)&&
                 (Question2==true)&&
