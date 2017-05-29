@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public Spinner Question5_spinner;
     public int Question5_selection;
     public EditText mAnswer3;
+    public int Score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,33 +123,34 @@ public class MainActivity extends AppCompatActivity {
     public void Check(View view){
         Context context = getApplicationContext();
         CharSequence text;
+        Score=0;
 
         //Question 2 checking
-        if ((Question2_1==true)&&(Question2_2==true)&&(Question2_3==false)){
-        Question2=true;}
-        else Question2=false;
+        Question2 = (Question2_1) && (Question2_2) && (!Question2_3);
         //Question 3 checking
         mAnswer3 = (EditText)findViewById(R.id.Answer_3);
         String Answer3=mAnswer3.getText().toString().toLowerCase();
         if (Answer3.equals("highbury")) { Question3=true;}
         //Question 5 checking
-        if (Question5_selection==4) {Question5=true;} else Question5=false;
-        if (
-                (Question1==true)&&
-                (Question2==true)&&
-                (Question3==true)&&
-                (Question4==true)&&
-                (Question5==true)
-           )
-        {text = "All answeres are correct"; }
-        else {
-            text = "Wrong Answer in:";
-            if (Question1==false)text=text+"Q1, ";
-            if (Question2==false)text=text+"Q2, ";
-            if (Question3==false)text=text+"Q3, ";
-            if (Question4==false)text=text+"Q4, ";
-            if (Question5==false)text=text+"Q5";
-        }
+        Question5 = Question5_selection == 4;
+        /* Calculating Score */
+        if (Question1) {Score= Score+1;}
+        if (Question2) {Score= Score+1;}
+        if (Question3) {Score= Score+1;}
+        if (Question4) {Score= Score+1;}
+        if (Question5) {Score= Score+1;}
+
+        if (Score==5) text = "Perfect score! Your score is: "+Score; else text = "Your score is: "+Score;
+
+            if ((!Question1)||(!Question2)||(!Question3)||(!Question4)||(!Question5) ) {
+                text = text + " you have wrong Answer in: ";
+                if (!Question1) text = text + "Question1, ";
+                if (!Question2) text = text + "Question2, ";
+                if (!Question3) text = text + "Question3, ";
+                if (!Question4) text = text + "Question4, ";
+                if (!Question5) text = text + "Question5";
+            }
+
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
