@@ -3,26 +3,72 @@ package com.example.android.quizarsenal;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private boolean Question1=false;
-    private int Question2=0;
+    public boolean Question1=false;
+    public boolean Question2=false;
+    public boolean Question2_1=false;
+    public boolean Question2_2=false;
+    public boolean Question2_3=false;
+    public boolean Question3=false;
+    public boolean Question4=false;
+    public boolean Question5=false;
+    public Spinner Question5_spinner;
+    public int Question5_selection;
+    public EditText mAnswer3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //EditText
+        mAnswer3 = (EditText)findViewById(R.id.Answer_3);
+
+        mAnswer3.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
+
+        //Creation of Spinner
+        Question5_spinner = (Spinner) findViewById(R.id.Answer_5_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Answer_5_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Question5_spinner.setAdapter(adapter);
+
+        Question5_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Question5_selection=position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                Question5_selection=0;
+            }
+
+        });
+
+
     }
 
-    public void onRadioButtonClicked(View view) {
+    public void onRadioButtonClickedQuestion1(View view) {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.Answer_1_1:
@@ -43,42 +89,68 @@ public class MainActivity extends AppCompatActivity {
     public void onCheckboxClicked(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-
         // Check which checkbox was clicked
         switch(view.getId()) {
             case R.id.Answer_2_1:
-                if (checked)
-                Question2=Question2+1;
-                else
-                // nothing
+                Question2_1 = checked;
                 break;
             case R.id.Answer_2_2:
-                if (checked)
-                    Question2=Question2+1;
-                else
-                // nothing
+                Question2_2 = checked;
                 break;
             case R.id.Answer_2_3:
-                if (checked)
-                    Question2=Question2;
-                else
-                // nothing
+                Question2_3 = !checked;
                 break;
-            // TODO: Veggie sandwich
+        }
+    }
+
+    public void onRadioButtonClickedQuestion4(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.Answer_4_1:
+                if (checked)
+                    Question4=false;
+                break;
+            case R.id.Answer_4_2:
+                if (checked)
+                    Question4=true;
+                break;
         }
     }
 
     public void Check(View view){
         Context context = getApplicationContext();
-        CharSequence text="";
-        if ((Question1==true) && (Question2==2))
-            {text = "Good Answer"; }
-        else text = "Wrong Answer";
+        CharSequence text;
 
+        //Question 2 checking
+        if ((Question2_1==true)&&(Question2_2==true)&&(Question2_3==false)){
+        Question2=true;}
+        else Question2=false;
+        //Question 3 checking
+        mAnswer3 = (EditText)findViewById(R.id.Answer_3);
+        String Answer3=mAnswer3.getText().toString().toLowerCase();
+        if (Answer3.equals("highbury")) { Question3=true;}
+        //Question 5 checking
+        if (Question5_selection==4) {Question5=true;}
+        if (
+                (Question1==true)&&
+                (Question2==true)&&
+                (Question3==true)&&
+                (Question4==true)&&
+                (Question5==true)
+           )
+        {text = "All answeres are correct"; }
+        else {
+            text = "Wrong Answer in:";
+            if (Question1==false)text=text+"Q1, ";
+            if (Question2==false)text=text+"Q2, ";
+            if (Question3==false)text=text+"Q3, ";
+            if (Question4==false)text=text+"Q4, ";
+            if (Question5==false)text=text+"Q5";
+        }
         int duration = Toast.LENGTH_SHORT;
-
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
     }
 }

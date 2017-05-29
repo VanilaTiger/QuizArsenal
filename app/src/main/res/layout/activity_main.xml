@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/intro"
+        android:textSize="16sp"
         android:paddingBottom="36dp"/>
 
     <LinearLayout
@@ -41,17 +42,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Answer_1.1"
-                android:onClick="onRadioButtonClicked"/>
+                android:onClick="onRadioButtonClickedQuestion1"/>
             <RadioButton android:id="@+id/Answer_1.2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Answer_1.2"
-                android:onClick="onRadioButtonClicked"/>
+                android:onClick="onRadioButtonClickedQuestion1"/>
             <RadioButton android:id="@+id/Answer_1.3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/Answer_1.3"
-                android:onClick="onRadioButtonClicked"/>
+                android:onClick="onRadioButtonClickedQuestion1"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -105,17 +106,66 @@
             android:layout_marginTop="8dp">
 
             <EditText
+                android:id="@+id/Answer_3"
                 android:inputType="textNoSuggestions"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/Answer_3.1"/>
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/Answer_3.1"
+                />
 
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/Question4"
+        android:layout_below="@+id/Question3"
+        style="@style/CustomQuestionLayoutStyle">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Question4"
+            />
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+            <RadioButton android:id="@+id/Answer_4.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Answer_4.1"
+                android:onClick="onRadioButtonClickedQuestion4"/>
+            <RadioButton android:id="@+id/Answer_4.2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Answer_4.2"
+                android:onClick="onRadioButtonClickedQuestion4"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Question5"
+        android:layout_below="@+id/Question4"
+        style="@style/CustomQuestionLayoutStyle">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Question5"
+            />
+        <Spinner
+            android:id="@+id/Answer_5_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:entries="@array/Answer_5_array"
+            android:prompt="@string/Answer_5_prompt"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/Check"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/Question5"
         android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,15 +1,30 @@
 <resources>
     <string name="app_name">QuizArsenal</string>
-    <string name="intro">This Quiz contains 9 different questions about Football Club Arsenal London Good Luck!</string>
-    <string name="Question1">When was Arsenal Club funded?</string>
+    <string name="intro">This Quiz contains 5 different questions about Football Club Arsenal London Good Luck!</string>
+    <string name="Question1">1. When was Arsenal Club funded?</string>
     <string name="Answer_1.1">1886</string>
     <string name="Answer_1.2">1899</string>
     <string name="Answer_1.3">1903</string>
-    <string name="Question2">How ever played for Arsenal?</string>
+    <string name="Question2">2. Who ever played for Arsenal?</string>
     <string name="Answer_2.1">Thierry Henry</string>
     <string name="Answer_2.2">Sol Campbell</string>
     <string name="Answer_2.3">Arsene Wenger</string>
-    <string name="Question3">What is the name of the previous Arsenal Stadium?</string>
+    <string name="Question3">3. What is the name of the previous Arsenal Stadium?</string>
     <string name="Answer_3.1">Name of Stadium</string>
+    <string name="Question4">4. Have Arsenal ever Won Champions League final?</string>
+    <string name="Answer_4.1">Yes</string>
+    <string name="Answer_4.2">No</string>
+    <string name="Question5">5. How many times have Arsenal won Premiership?</string>
+    <string name="Answer_5_prompt">Choose a number</string>
+    <string-array name="Answer_5_array">
+        <item>1</item>
+        <item>5</item>
+        <item>7</item>
+        <item>10</item>
+        <item>13</item>
+        <item>17</item>
+        <item>20</item>
+        <item>25</item>
+    </string-array>
     <string name="Check">Check</string>
 </resources>
